@@ -1,0 +1,91 @@
+name: Build and Push Docker Image
+
+on:
+  # push:
+  #   branches:
+  #     - main
+  workflow_dispatch: {}
+
+env:
+  AWS_REGION: ${{ secrets.AWS_REGION }}
+  ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
+  IMAGE_TAG: ${{ github.sha }}
+
+jobs:
+  build-and-push:
+    name: Build & Push to ECR
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      # Checkout code
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Configure AWS Credentials
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # Login to ECR
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      # Build Docker Image
+      - name: Build Docker Image
+        run: |
+          docker build -t $ECR_REPOSITORY:$IMAGE_TAG ./app
+
+      # Tag Image for ECR
+      - name: Tag Image
+        run: |
+          docker tag $ECR_REPOSITORY:$IMAGE_TAG \
+          ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG
+
+      # Push Image
+      - name: Push to ECR
+        run: |
+          docker push \
+          ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG
+
+#   # OPTIONAL: Auto Deploy by Creating New Launch Template Version
+#   deploy:
+#     name: Trigger ASG Rolling Deployment
+#     needs: build-and-push
+#     runs-on: ubuntu-latest
+
+#     if: success()
+
+#     steps:
+#       - name: Configure AWS credentials
+#         uses: aws-actions/configure-aws-credentials@v4
+#         with:
+#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           aws-region: ${{ env.AWS_REGION }}
+
+#       - name: Create new Launch Template Version
+#         run: |
+#           aws ec2 create-launch-template-version \
+#             --launch-template-id ${{ secrets.LAUNCH_TEMPLATE_ID }} \
+#             --source-version 1 \
+#             --launch-template-data "{\"UserData\":\"$(echo -n $(base64 -w 0 <<EOF
+# #!/bin/bash
+# yum update -y
+# amazon-linux-extras install docker -y
+# systemctl start docker
+# docker run -d -p 80:3000 ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG
+# EOF
+# ))\"}"
+
+#       - name: Start Instance Refresh
+#         run: |
+#           aws autoscaling start-instance-refresh \
+#             --auto-scaling-group-name prod-asg
