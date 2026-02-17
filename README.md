@@ -10,6 +10,11 @@ Production-ready AWS infrastructure for a highly available, secure, scalable Saa
 
 This solution provisions infrastructure using Terraform and deploys a Dockerized web application behind an Application Load Balancer.
 
+**Git Branching Strategy:**
+
+main
+develop
+
 **Core AWS Services Used**
 
 Amazon VPC
@@ -159,18 +164,3 @@ Launch Template versioning
 ASG instance refresh
 
 Zero downtime deployments
-
-
-**Architecture Diagram**
-
-                Internet
-                    |
-             Application Load Balancer
-                    |
-           -------------------------
-           |                       |
-        EC2 (Private AZ1)     EC2 (Private AZ2)
-           |                       |
-                 NAT Gateway
-                    |
-               Internet Gateway
