@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 
 app.get("/", (req, res) => {
-  res.send("SaaS Production App Running ");
+  res.send("SaaS Production App Running 🚀");
 });
 
 app.get("/health", (req, res) => {
