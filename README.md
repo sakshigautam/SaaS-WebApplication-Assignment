@@ -1,4 +1,4 @@
-**SaaS Production Infrastructure – Terraform + CI/CD**="1024" alt=
+**SaaS Production Infrastructure – Terraform + CI/CD**
 
 Production-ready AWS infrastructure for a highly available, secure, scalable SaaS web application.
 
