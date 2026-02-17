@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-
+      
 env:
   IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/saas-app
   IMAGE_TAG: ${{ github.sha }}
