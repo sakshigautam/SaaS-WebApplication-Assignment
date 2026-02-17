@@ -1,8 +1,13 @@
-**SaaS Production Infrastructure – Terraform + CI/CD**
+<img width="1536" height="1024" alt="ChatGPT Image Feb 17, 2026, 03_51_04 PM" src="https://github.com/user-attachments/assets/28f65e4c-d1df-4748-baa3-5d7a8db1f678" />**SaaS Production Infrastructure – Terraform + CI/CD**
 
 Production-ready AWS infrastructure for a highly available, secure, scalable SaaS web application.
 
 **Architecture Overview**
+
+![Uploading image.png…]()
+
+
+
 
 This solution provisions infrastructure using Terraform and deploys a Dockerized web application behind an Application Load Balancer.
 
