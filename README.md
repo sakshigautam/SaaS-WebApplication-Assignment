@@ -10,7 +10,7 @@ Production-ready AWS infrastructure for a highly available, secure, scalable Saa
 
 This solution provisions infrastructure using Terraform and deploys a Dockerized web application behind an Application Load Balancer.
 
-Core AWS Services Used
+**Core AWS Services Used**
 
 Amazon VPC
 
@@ -24,45 +24,6 @@ AWS IAM
 
 AWS Budgets
 
-**Architecture Design**
-
-**Network Layer**
-
-VPC with 2 Availability Zones
-
-2 Public Subnets (ALB)
-
-2 Private Subnets (EC2)
-
-Internet Gateway
-
-NAT Gateway
-
-Route Tables (segmented public/private)
-
-**Application Layer**
-
-Application Load Balancer (HTTPS)
-
-Auto Scaling Group (min 2 instances)
-
-EC2 instances in private subnets
-
-Dockerized Node.js application
-
-Health checks via /health
-
-Observability
-
-CloudWatch metrics enabled
-
-CPU utilization alarm
-
-Unhealthy host alarm
-
-SNS email notifications
-
-Monthly budget alert
 
 **Deployment Steps**
 
@@ -74,10 +35,11 @@ Terraform installed
 
 Docker installed
 
-GitHub repository secrets configured
 
-Deploy Infrastructure
-cd environments/prod
+
+**Deploy Infrastructure**
+
+cd terraform
 terraform init
 terraform plan
 terraform apply
@@ -104,7 +66,8 @@ Access Application
 
 After deployment:
 
-https://<alb-dns-name>
+<img width="389" height="259" alt="image" src="https://github.com/user-attachments/assets/6060a3e9-7839-4b27-a427-e21da85c3272" />
+
 
 **Architecture Decisions**
 1. Multi-AZ Design
