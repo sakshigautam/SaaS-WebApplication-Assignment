@@ -68,23 +68,29 @@ terraform apply
 
 Build & Push Docker Image
 
-GitHub Actions pipeline automatically:
+GitHub Actions pipeline automatically for pushing docker image to ECR.
 
-Builds Docker image
+Checkout Code -> Build Docker Image -> Trivy Scan -> Push Image to ECR
 
-Tags with commit SHA
+Manual Deployment as I would prefer EKS and Helm based deployment approach, but for this application requirements:
 
-Pushes to Docker Hub
+1) EC2 instances static user_data update with new docker image.
 
-Triggers rolling deployment
+1) EC2 → Auto Scaling Groups → prod-asg
 
-Manual build option:
+2) Instance refresh → Start instance refresh
 
-cd app
-docker build -t <dockerhub-username>/saas-app .
-docker push <dockerhub-username>/saas-app
+3) Set Minimum healthy percentage: 50% , Click Start.
 
-Access Application
+4) ASG launches new instance
+
+5) New instance runs user_data
+
+6) It pulls latest image
+
+7) ALB health check passes
+
+8) Old instance terminates
 
 After deployment:
 
