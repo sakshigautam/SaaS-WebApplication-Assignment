@@ -41,8 +41,7 @@ AWS Budgets
 
 <img width="220" height="13" alt="image" src="https://github.com/user-attachments/assets/d960b4da-b29c-4b2e-aff1-98d4f90c6d7f" />
 
-
-
+<img width="309" height="86" alt="image" src="https://github.com/user-attachments/assets/67724e3a-3fa1-4d22-8fb6-3a14aea738b2" />
 
 
 
@@ -70,11 +69,11 @@ Build & Push Docker Image
 
 GitHub Actions pipeline automatically for pushing docker image to ECR.
 
+**PS: CI part automated , CD part can be automated , but not done as of now**
+
 Checkout Code -> Build Docker Image -> Trivy Scan -> Push Image to ECR
 
 Manual Deployment as I would prefer EKS and Helm based deployment approach, but for this application requirements:
-
-1) EC2 instances static user_data update with new docker image.
 
 1) EC2 → Auto Scaling Groups → prod-asg
 
@@ -91,6 +90,20 @@ Manual Deployment as I would prefer EKS and Helm based deployment approach, but 
 7) ALB health check passes
 
 8) Old instance terminates
+
+New Image → ECR
+        ↓
+ASG Instance Refresh
+        ↓
+New EC2 boots
+        ↓
+UserData pulls image
+        ↓
+ALB health check passes
+        ↓
+Old instance terminated
+
+
 
 After deployment:
 
@@ -145,6 +158,10 @@ Monitor cost using AWS Budgets alerts
 
 **Security Measures**
 
+ECR scans docker images
+
+Least privilege access to users.
+
 No public EC2 instances
 
 Private subnet isolation
@@ -157,11 +174,11 @@ IAM roles (no static credentials)
 
 HTTPS listener enforced
 
-S3 backend encrypted and private
+S3 backend encrypted and private.
 
 No secrets committed to repository
 
-Budget alert for anomaly detection
+Budget alerts for anomaly detection
 
 **Scaling Strategy**
 Auto Scaling Configuration
