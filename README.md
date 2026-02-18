@@ -180,6 +180,8 @@ No secrets committed to repository
 
 Budget alerts for anomaly detection
 
+Terraform code secrets to be fetched form AWS Secrets Manager or Hashicorp Vault
+
 **Scaling Strategy**
 Auto Scaling Configuration
 
