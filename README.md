@@ -105,9 +105,6 @@ Old instance terminated
 
 
 
-After deployment:
-
-<img width="389" height="259" alt="image" src="https://github.com/user-attachments/assets/6060a3e9-7839-4b27-a427-e21da85c3272" />
 
 
 **Architecture Decisions**
