@@ -29,19 +29,7 @@ AWS IAM
 
 AWS Budgets
 
-**AWS Console Snippets**
 
-<img width="208" height="152" alt="image" src="https://github.com/user-attachments/assets/d4d7edfd-2d81-4e4c-a91e-9a45471fecca" />
-
-<img width="224" height="82" alt="image" src="https://github.com/user-attachments/assets/28244cf1-58b4-47eb-9364-318f74236746" />
-
-<img width="227" height="117" alt="image" src="https://github.com/user-attachments/assets/028e529d-01a5-49df-8b5f-9a469d616e0b" />
-
-<img width="213" height="30" alt="image" src="https://github.com/user-attachments/assets/744bf2fd-28ca-473e-aa31-8895d0240cb0" />
-
-<img width="220" height="13" alt="image" src="https://github.com/user-attachments/assets/d960b4da-b29c-4b2e-aff1-98d4f90c6d7f" />
-
-<img width="309" height="86" alt="image" src="https://github.com/user-attachments/assets/67724e3a-3fa1-4d22-8fb6-3a14aea738b2" />
 
 
 
