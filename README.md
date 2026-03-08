@@ -120,6 +120,13 @@ Docker images tagged with commit SHA for version traceability.
 
 Terraform backend stored in S3 with DynamoDB locking.
 
+
+**AWS Console Snippets**
+
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/8db0a9bc-cb83-4f77-8735-defcf7990dfc" />
+
+
+
 Cost Estimate (us-east-1)
 Resource	Monthly Cost (Approx)
 2x t3.micro EC2	$17
